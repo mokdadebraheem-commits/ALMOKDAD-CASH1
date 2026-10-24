@@ -1,0 +1,10 @@
+'use strict';
+const K='miqdad_shop_v1';
+const blank=()=>({set:{shop:'محلي',cur:'ل.س',open:0,ns:true},prod:[],par:[],sale:[],buy:[],pay:[],exp:[]});
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const n=x=>typeof x==='string'?(+x.replace(/[٠-٩]/g,c=>c.charCodeAt(0)-1632).replace(/[۰-۹]/g,c=>c.charCodeAt(0)-1776).replace(/٫/g,'.').replace(/[،,\s]/g,'')||0):(+x||0),fmt=x=>n(x).toLocaleString('en-US',{maximumFractionDigits:2}),cur=()=>esc(D.set.cur);
+const today=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const tm=x=>(x&&x.t)||Date.parse((x&&x.d)||0)||0;
+const sm=(L,k)=>L.reduce((a,x)=>a+n(x[k]),0);
+const invNo=s=>s.no?'INV-'+String(s.no).padStart(5,'0'):s.id.slice(-5);
